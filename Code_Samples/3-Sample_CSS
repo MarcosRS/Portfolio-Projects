@@ -1,0 +1,119 @@
+
+This Is a Sample of a CSS Code I made to give a Web Apps design
+
+*{
+	font-family:arial;
+	font-size:14px;	
+}
+#Cabecera,#Menu,#Pie
+{
+	padding:4px;
+	
+}
+/*Quitamos el subrayado a los enlaces*/
+a{
+	text-decoration:none;
+
+}
+#Cabecera{
+	width:1020px;
+	height:140px;
+	background:#076bb6;
+	margin:auto;
+	color:#fff;
+	
+}
+#Menu
+{
+	width:1008px;
+	height:22px;
+	background:#d01000;
+	margin:auto;	
+	padding:10px;
+	margin-top:6px;
+	margin-bottom:6px;
+	color:#fff;
+	/*Gradiant estandarizado para diferentes navegadores*/
+	background: -webkit-linear-gradient(#e4e4e4, #c7c9cb)); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#e4e4e4, #c7c9cb); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#e4e4e4, #c7c9cb); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#e4e4e4, #c7c9cb); /* Standard syntax */
+}
+#Menu a
+{
+	
+	color:#076bb6;
+}
+#Cuerpo
+{
+	width:1028px;
+	margin:auto;
+	margin-bottom:6px;
+
+}
+/*
+	780 Contenido
+	240 Panel
+*/
+#Contenido,#Panel
+{
+	height:485px;
+	margin-bottom:6px;
+}
+#Contenido
+{
+		width:769px;
+		background:#e4e4e4;
+		float:left;
+		padding:4px;
+}
+#Panel{
+		width:236px;
+		background:#c7c9cb;
+		float:right;
+		padding:4px;
+}
+#Pie{
+		width:1020px;
+		height:90px;
+		background:#7f7f7f;
+		margin:auto;
+		clear:both;
+		margin-top:6px;
+
+}
+#Form{
+		width:98%;
+		margin:0.4em auto;
+
+}
+
+.imgLogo{
+	height:99%;
+}
+/*Foto de los usuarios registrados*/
+.fotoUsuario{
+	width:60px;
+}
+
+/*Propiedades para los enlaces del menu*/
+.Menues{
+	
+	margin-top:229px;
+}
+/*Estilo para el Formulario Estudiante*/
+.Cm,.Bt {
+	display:block;
+	width:80%;
+	height:2.0em;
+	background:#076bb6;
+	border:0px;
+	border-radius:0.4em;
+	margin-top:0.3em;
+	color:#fff;
+	font-size:1.0em;
+	padding:0.3em;
+}
+.Bt{
+	font-size:1.4em;
+}
