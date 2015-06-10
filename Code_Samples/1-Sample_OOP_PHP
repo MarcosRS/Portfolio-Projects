@@ -1,0 +1,331 @@
+My OOP PHP sample.
+
+<?php
+  $object = new User;
+  print_r($object); echo "<br>";
+
+  $object->name = "Marcos";
+  $object->password = "mypass";    
+                                 
+  print_r($object); echo "<br>";
+
+  $object->save_user();
+
+  class User
+  {
+    public $name, $password;
+
+    function save_user()
+    {
+  	  echo "Save User code goes here";
+    }
+  }
+?>
+
+-CLONING AN OBJECT:
+
+<?php
+  $object1 = new User();
+  $object1->name = "Alice";
+  $object2 = clone $object1;       
+  $object2->name = "Amy";
+
+  echo "object1 name = " . $object1->name . "<br>";
+  echo "object2 name = " . $object2->name;
+  
+  class User
+  {
+    public $name;
+  }
+?>
+
+
+
+
+
+
+
+
+A PRACTICAL EXAMPLE OF My CODE, CONNECTING TO A MySQL DATABASE  USING PHP.
+
+
+
+<?php // sqltest.php
+  require_once 'login.php';
+  $db_server = mysql_connect($db_hostname , $db_username ,$db_password );
+  
+  if (!$db_server) die("unable  to connect to MySQL" .mysql_error());
+
+
+    //Selecting a Database 
+    mysql_select_db($db_database,db_server) 
+    or die("Unable to Select database : " .mysql_error()); 
+   
+   if (isset($_POST['delete']) && isset($_POST['isbn'])){
+      $isbn = get_post('isbn');
+      query = "DELETE FROM classics WHERE isbn = '$isbn'";
+
+      if (!mysql_query($query,$db_server)) echo "DELETE failed: $query<br>" . mysql_error() ."<br><br>";
+
+   }
+
+
+
+  if (isset($_POST['author'])   &&
+      isset($_POST['title'])    &&
+      isset($_POST['category']) &&
+      isset($_POST['year'])     &&
+      isset($_POST['isbn']))
+  {
+    $author   = get_post($conn, 'author');
+    $title    = get_post($conn, 'title');
+    $category = get_post($conn, 'category');
+    $year     = get_post($conn, 'year');
+    $isbn     = get_post($conn, 'isbn');
+    
+
+    $query    = "INSERT INTO classics VALUES" .
+     "('$author', '$title', '$category', '$year', '$isbn')";
+      
+
+    if (!mysql_query($query,$db_server)) echo "INSERT failed: $query<br>" . mysql_error() ."<br><br>";
+  }
+
+  echo <<<_END
+  <form action="sqltest.php" method="post"><pre>
+    Author <input type="text" name="author">
+     Title <input type="text" name="title">
+  Category <input type="text" name="category">
+      Year <input type="text" name="year">
+      ISBN <input type="text" name="isbn">
+           <input type="submit" value="ADD RECORD">
+  </pre></form>
+_END;
+
+  $query  = "SELECT * FROM classics";
+  $result = mysql_query($query);
+  if (!$result) die ("Database access failed: " . mysql_error());
+
+  $rows = mysql_num_rows($result);
+  
+  for ($j = 0 ; $j < $rows ; ++$j)
+  {
+   
+    $row = $mysql_fetch_row($result);
+
+    echo <<<_END
+  <pre>
+    Author $row[0]
+     Title $row[1]
+  Category $row[2]
+      Year $row[3]
+      ISBN $row[4]
+  </pre>
+  <form action="sqltest.php" method="post">
+  <input type="hidden" name="delete" value="yes">
+  <input type="hidden" name="isbn" value="$row[4]">
+  <input type="submit" value="DELETE RECORD"></form>
+_END;
+  }
+  
+  mysql_close($db_server);
+  
+  function get_post($var)
+  {
+    return mysql_real_escape_string($_POST[$var]);
+  }
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FROM HERE ON ARE JUST EXAMPLES OF HOW I REASOLVE PROBLEMS IN  PHP.
+
+<?php
+/*
+# Write a method that takes in a string and returns the number of
+# letters that appear more than once in the string. You may assume
+# the string contains only lowercase letters. Count the number of
+# letters that repeat, not the number of times they repeat in the
+# string.
+#
+# Difficulty: hard.
+
+def num_repeats(string)
+end
+
+# These are tests to check that your code is working. After writing
+# your solution, they should all print true.
+
+puts('num_repeats("abdbc") == 1: ' + (num_repeats('abdbc') == 1).to_s)
+# one character is repeated
+puts('num_repeats("aaa") == 1: ' + (num_repeats('aaa') == 1).to_s)
+puts('num_repeats("abab") == 2: ' + (num_repeats('abab') == 2).to_s)
+puts('num_repeats("cadac") == 2: ' + (num_repeats('cadac') == 2).to_s)
+puts('num_repeats("abcde") == 0: ' + (num_repeats('abcde') == 0).to_s)
+*/
+
+
+
+function num_repeats($str){
+
+$alphabet="abcdefghijklmnopqrstuvwxyz";
+$exploded_alphabet= array();
+$totalRepeats=0;
+        //creates the array for the alphabet
+    for ($i=0; $i < strlen($alphabet); $i++) {   
+      $exploded_alphabet[$alphabet[$i]]= 0;
+        
+        }
+        //searches the input
+        for ($n=0; $n < strlen($str) ; $n++) { 
+           
+           foreach ( $exploded_alphabet as $key => $value) {
+             if ($str[$n]==$key){
+              $exploded_alphabet[$key]= $exploded_alphabet[$key]+1;
+             }
+           }
+         }
+
+    //Verifies the value of each repeated letter.        
+         foreach ( $exploded_alphabet as $key => $value) {
+            if ($value >1) {
+              $totalRepeats++;
+      }
+           
+
+
+
+         }
+return $totalRepeats;
+}
+
+echo num_repeats("aaabbbbbbbbccc");
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+/*
+require '07_rectangle_intersection'
+require 'rspec'
+
+# Write a function, `rec_intersection(rect1, rect2)` and returns the
+# intersection of the two.
+#
+# Rectangles are represented as a pair of coordinate-pairs: the
+# bottom-left and top-right coordinates (given in `[x, y]` notation).
+#
+# Hint: You can calculate the left-most x coordinate of the
+# intersection by taking the maximum of the left-most x coordinate of
+# each rectangle. Likewise, you can calculate the top-most y
+# coordinate of the intersection by taking the minimum of the top most
+# y coordinate of each rectangle.
+#
+# Difficulty: 4/5
+
+describe "#rectangle_intersection" do
+  it "handles a simple case" do
+    rec_intersection(
+      [[0, 0], [2, 1]],
+      [[1, 0], [3, 1]]
+    ).should == [[1, 0], [2, 1]]
+  end
+
+  it "returns the smaller rectangle if engulfed completely" do
+    rec_intersection(
+      [[1, 1], [2, 2]],
+      [[0, 0], [5, 5]]
+    ).should == [[1, 1], [2, 2]]
+  end
+
+  it "returns nil if there is no intersection" do
+    rec_intersection(
+      [[1, 1], [2, 2]],
+      [[4, 4], [5, 5]]
+    ).should == nil
+  end
+
+  it "handles a more complex case" do
+    rec_intersection(
+      [[1, 1], [5, 4]],
+      [[2, 2], [3, 5]]
+    ).should == [[2, 2], [3, 4]]
+  end
+
+end
+*/
+
+function rec_intersection($rect1,$rect2){
+  
+$output=array(array(),array());
+
+$left_most_max_x= max($rect1[0][0] , $rect2[0][0]);
+$left_most_max_y= max($rect1[0][1] , $rect2[0][1]);
+
+$top_most_min_x= min($rect1[1][0] , $rect2[1][0]);
+$top_most_min_y= min($rect1[1][1] , $rect2[1][1]);
+
+
+                if ($rect1[0][0] > $rect2[1][0] ||  $rect2[0][0] > $rect1[1][0]  ) {
+                    
+                     return "nil";
+                }
+
+               else{
+                $output[0][0]=$left_most_max_x; 
+                $output[0][1]=$left_most_max_y;
+
+                $output[1][0]=$top_most_min_x;
+                $output[1][1]=$top_most_min_y;
+                }
+
+return $output;
+
+
+}
+echo "should == [[1, 0], [2, 1]] <br>";
+print_r(rec_intersection([[0, 0], [2, 1]],[[1, 0], [3, 1]]));
+echo"<br>";
+
+echo"<br>";
+echo "should == [[1, 1], [2, 2]]<br>";
+print_r(rec_intersection([[1, 1], [2, 2]],[[0, 0], [5, 5]]));
+echo"<br>";
+
+echo"<br>";
+echo "should == nil  <br>";
+print_r(rec_intersection([[1, 1], [2, 2]],[[4, 4], [5, 5]]));
+echo"<br>";
+
+echo"<br>";
+echo "should == [[2, 2], [3, 4]]  <br>";
+print_r(rec_intersection([[1, 1], [5, 4]], [[2, 2], [3, 5]]));
+echo"<br>";
+
+
+?>
