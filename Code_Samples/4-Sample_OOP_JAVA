@@ -1,0 +1,187 @@
+This is a  sample of my Coding implemetation in Java-OOP  
+
+--------------------------------------------------------------------------------------------------------------------------
+package demostracion;
+
+public class Alumno {
+	private Asignatura asignatura1;
+	private Asignatura asignatura2;
+	private Asignatura asignatura3;
+	
+	public Alumno (Asignatura materia1 , Asignatura materia2,Asignatura materia3){
+		this.asignatura1 = materia1;
+		this.asignatura2 = materia2;
+		this.asignatura3 = materia3; 
+		
+	}
+
+	public Asignatura getAsignatura1() {
+		return asignatura1;
+	}
+
+	public void setAsignatura1(Asignatura asignatura1) {
+		this.asignatura1 = asignatura1;
+	}
+
+	public Asignatura getAsignatura2() {
+		return asignatura2;
+	}
+
+	public void setAsignatura2(Asignatura asignatura2) {
+		this.asignatura2 = asignatura2;
+	}
+
+	public Asignatura getAsignatura3() {
+		return asignatura3;
+	}
+
+	public void setAsignatura3(Asignatura asignatura3) {
+		this.asignatura3 = asignatura3;
+	}
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------
+package demostracion;
+
+public class Asignatura {
+	private int id;
+	private double calificacion ;
+    private String nombre;
+	  
+    public Asignatura(){
+	   id = 1000 ;
+	   calificacion=95.0;
+       nombre = "solo un Ejemplo"; 
+	  }
+
+
+	  public Asignatura (int id, double calificacion, String nombre ){
+	     this.id= id;
+	     this.calificacion = calificacion;
+         this.nombre= nombre;
+
+	  }
+	  
+	  
+	  public Asignatura (int id, String nombre ){
+		     this.id= id;
+		     this.nombre= nombre;
+
+		  }
+
+	  public double getCalificacion(){
+	      return calificacion;
+
+	  }
+
+	  public int getId(){
+
+	   return id;
+
+	  }
+
+	  public void setCalificacion(double calificacion){
+	  		this.calificacion = calificacion;
+		}
+
+	  public void setId(int  id){
+	  		this.id = id;
+		}
+     
+     public String getNombre(){
+    	 return nombre;
+    	 
+     } 
+
+
+
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------
+package demostracion;
+
+public class Profesor {
+	
+	
+   public Profesor(){
+	   
+	  System.out.println("EL Profesor fue dado de alta"); 
+	   
+	   }	
+   public void  ponerCalificacion(Alumno alumno){
+	 double calificacion1 = Math.random() * 100;
+	 double calificacion2 = Math.random() * 100;
+	 double calificacion3 = Math.random() * 100;
+	 
+	 alumno.getAsignatura1().setCalificacion(calificacion1); 
+	 alumno.getAsignatura2().setCalificacion(calificacion2);
+	 alumno.getAsignatura3().setCalificacion(calificacion3);
+	 
+	 System.out.println("Calificacion1= " +calificacion1);
+	 System.out.println("Calificacion2= " +calificacion2);
+	 System.out.println("Calificacion3= " +calificacion3);
+	 
+ }
+	
+   public double calcularMedia (Alumno alumno){
+	   
+	   double nota1 = alumno.getAsignatura1().getCalificacion();
+	   double nota2 = alumno.getAsignatura2().getCalificacion();
+	   double nota3 = alumno.getAsignatura3().getCalificacion();
+	   
+	   return (nota1+nota2+nota3)/3;
+   }
+	
+}
+
+--------------------------------------------------------------------------------------------------------------------------
+package demostracion;
+
+public class testAsignatura {
+
+	public static void main(String[] args) {
+		
+		Asignatura matematica = new Asignatura();
+	   	Asignatura sociales = new Asignatura(1100,80.6, "Sociales" );
+
+	   	System.out.println("El nombre de la asignatura es  Matematica "+ matematica.getNombre() );
+	   	System.out.println("Id de la Asignatura matematica es: " + matematica.getId());
+	    System.out.println("Calificacion  de la Asignatura matematica es: " + matematica.getCalificacion());
+	    	
+
+	    System.out.println("El nombre de la asignatura es Sociales "+ sociales.getNombre() );
+	    System.out.println("Id de la Asignatura sociales es: " + sociales.getId());
+	    System.out.println("Calificacion  de la Asignatura sociales es: " + sociales.getCalificacion());
+		
+	}
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------
+package demostracion;
+
+public class Sistema {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+   
+		Asignatura asignatura1 = new Asignatura(10001 , "Progamacion1"); 
+		Asignatura asignatura2 = new Asignatura(10002 , "BaseDeDatos ");
+		Asignatura asignatura3 = new Asignatura(10003 , "BaseDeDatos ");
+	  
+		Alumno pedro = new Alumno(asignatura1,asignatura2,asignatura3 ); 
+		Alumno miguel = new Alumno(asignatura1,asignatura2,asignatura3 );
+		
+	    Profesor jose = new Profesor();
+	    
+	    jose.ponerCalificacion(pedro);
+	    System.out.println(" Promedio de pedro= "+ jose.calcularMedia(pedro) + "\n");
+	    jose.ponerCalificacion(miguel);
+	    System.out.println(" Promedio de miguel= "+ jose.calcularMedia(miguel)+"\n");
+		
+	}
+
+}
+
